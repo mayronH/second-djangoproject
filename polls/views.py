@@ -72,12 +72,15 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
         # Filtra os objetos que possuem a data de publicação anterior ou igual a data atual
-        return Question.objects.filter(pub_date__lte=timezone.now()).order_by('pub_date')[:5]
+        return Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
 
 
 class DetailView(generic.DetailView):
     model = Question
     template_name = 'polls/detail.html'
+
+    def get_queryset(self):
+        return Question.objects.filter(pub_date__lte=timezone.now())
 
 
 class ResultsView(generic.DetailView):
