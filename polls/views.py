@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.utils import timezone
 from django.views import generic
 # from django.template import loader
 from .models import Question, Choice
@@ -9,25 +10,25 @@ from .models import Question, Choice
 
 # Carregamndo um template e passando um context
 # def index(request):
-#     lastest_question_list = Question.objects.order_by('-pub_date')[:5]
+#     latest_question_list = Question.objects.order_by('-pub_date')[:5]
 #     template = loader.get_template('polls/index.html')
 #     context = {
-#       'lastest_question_list' : lastest_question_list,
+#       'latest_question_list' : latest_question_list,
 #     }
 #     return HttpResponse(template.render(context,request))
 
 #Utilizando um atalho render, eliminando o loader e o HttpResponse
 # def index(request):
-#     lastest_question_list = Question.objects.order_by('-pub_date')[:5]
+#     latest_question_list = Question.objects.order_by('-pub_date')[:5]
 #     context = {
-#         'lastest_question_list' : lastest_question_list,
+#         'latest_question_list' : latest_question_list,
 #     }
 #     return render(request, 'polls/index.html', context)
 
 #Código mais limpo
 # def index(request):
-#     lastest_question_list = Question.objects.order_by('-pub_date')[:5]
-#     return render(request, 'polls/index.html', {'lastest_question_list': lastest_question_list})
+#     latest_question_list = Question.objects.order_by('-pub_date')[:5]
+#     return render(request, 'polls/index.html', {'latest_question_list': latest_question_list})
 
 #Mostrando um objeto ou mostrando uma página 404 caso não encontrado
 # def detail(request,question_id):
@@ -70,7 +71,8 @@ class IndexView(generic.ListView):
     context_object_name = 'latest_question_list'
 
     def get_queryset(self):
-        return Question.objects.order_by('-pub_date')[:5]
+        # Filtra os objetos que possuem a data de publicação anterior ou igual a data atual
+        return Question.objects.filter(pub_date__lte=timezone.now()).order_by('pub_date')[:5]
 
 
 class DetailView(generic.DetailView):
@@ -81,6 +83,8 @@ class DetailView(generic.DetailView):
 class ResultsView(generic.DetailView):
     model = Question
     template_name = 'polls/results.html'
+
+
 
 
 
