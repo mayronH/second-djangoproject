@@ -1,8 +1,74 @@
-li a {
-    color: green;
+body {
+    background-color: #21262d;
+    color: rgb(185, 184, 184);
+}
+h1 {
+    font-size: 36px;
+    margin: 0px 0px 30px 0px;
+    color: #009dda;
 }
 
-body{
-    background: url('../images/background.jpg') center center;
-    background-size: cover;
+h3 a {
+    color: #009dda;
+}
+
+h3 a:hover{
+    color: #009dda; 
+}
+
+.enquete{
+    background-color: #24292d;
+    padding: 20px;
+    padding-left: 40px;
+    margin: 15px 0;
+    outline: 1px solid #3f474e;
+    outline-offset: -10px;
+}
+
+/* .formulario {
+    display: flex;
+    justify-content: center;
+} */
+
+.polls-form label{
+    font-size: 24px;
+    padding-left: 20px;
+}
+
+.polls-form input {
+    width: 20px;
+    height: 20px;
+    margin-top: 5px;
+}
+
+.btn-default:focus {
+    color: #fff!important;
+    background: none!important;
+}
+
+.btn-default:hover {
+    color: #fff!important;
+    background: none!important;
+}
+
+.btn-default:active {
+    color: #fff!important;
+    background: none!important;
+}
+
+.btn-votar {
+    /* text-align: center; */
+    margin-top: 15px;
+    padding-left: 50px;
+}
+
+.btn-votar button {
+    background: none;
+    border-color: #3f474e;
+    color: #fff;
+}
+
+#again{
+    display: flex;
+    justify-content: flex-end;
 }

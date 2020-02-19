@@ -1,21 +1,21 @@
-{% load static %}
-<head>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'polls/css/style.css' %}">
-</head>
-
-
-{% if latest_question_list %}
-    <ul>
-    {% for question in latest_question_list %}
-        <!-- Não utilize: -->
-        <!-- <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li> -->
-        <!-- Utilize: -->
-        <li><a href="{% url 'polls:detail' question.id %}"> {{ question.question_text }}</a></li>
-        <img src="{% static 'polls/images/background.jpg' %}" class="img-responsive">
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %}
+{% extends 'polls/base.html' %}
+{% block content %} 
+    {% if latest_question_list %}
+        <div class="row titulo">
+            <h1>Últimas enquetes</h1>
+        </div>
+        <div class="row enquetes">
+        {% for question in latest_question_list %}
+            <!-- Não utilize: -->
+            <!-- <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li> -->
+            <!-- Utilize: -->
+            <!-- <li><a href="{% url 'polls:detail' question.id %}"> {{ question.question_text }}</a></li> -->
+            <div class="enquete">
+                <h3><a href="{% url 'polls:detail' question.id %}"> {{ question.question_text }}</a></h3>
+            </div>
+        {% endfor %}
+        </div>
+    {% else %}
+        <p>No polls are available.</p>
+    {% endif %}
+{% endblock content %}

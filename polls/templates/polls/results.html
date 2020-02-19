@@ -1,9 +1,25 @@
-<h1>{{ question.question_text }}</h1>
+{% extends 'polls/base.html' %}
+{% block content %}
+    <div class="row titulo">
+        <h1>{{ question.question_text }}</h1>
+    </div> 
 
-<ul>
-    {% for choice in question.choice_set.all %}
-        <li>{{ choice.choice_text }} -- {{choice.votes}} vote{{ choice.votes|pluralize }}</li>
-    {% endfor %}
-</ul>
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row enquete">
+            {% for choice in question.choice_set.all %}
+                <div class="escolha">
+                    <!-- <li>{{ choice.choice_text }} -- {{choice.votes}} vote{{ choice.votes|pluralize }}</li> -->
+                    <p>{{ choice.choice_text }}</p>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" 
+                        style="width:{{ choice.percentage_votes }}">{{choice.votes}}</div>
+                    </div>
+                </div>
+            {% endfor %}
+            <a id="again" href="{% url 'polls:detail' question.id %}">Vote again?</a>
+            </div>
+        </div>
+    </div>
 
-<a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+{% endblock content %}

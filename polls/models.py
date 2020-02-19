@@ -28,11 +28,22 @@ class Question(models.Model):
     def __str__(self):
         return self.question_text
 
+    def votes_total(self):
+        count = 0
+        for choice in self.choice_set.all():
+            count += choice.votes 
+        return count
+
 
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)
+
+    def percentage_votes(self):
+        total = self.question.votes_total()
+        porcentagem = (self.votes/total)
+        return format(porcentagem, ".0%")
 
     def __str__(self):
         return self.choice_text
