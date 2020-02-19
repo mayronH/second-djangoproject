@@ -16,6 +16,14 @@ class Question(models.Model):
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.pub_date <= now
 
+    #Modifica as informações na tabela no admin
+    #Ordenar pela data de publicação
+    was_published_recently.admin_order_field ='pub_date'
+    #Modifica o texto 'False' 'True' por um ícone visual
+    was_published_recently.boolean = True
+    #Modifica o cabeçalho da coluna
+    was_published_recently.short_description = 'Published recently?'
+
 
     def __str__(self):
         return self.question_text

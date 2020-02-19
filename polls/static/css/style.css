@@ -1,0 +1,8 @@
+li a {
+    color: green;
+}
+
+body{
+    background: url('../images/background.jpg') center center;
+    background-size: cover;
+}
